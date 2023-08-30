@@ -27,8 +27,8 @@ class AppLayout(GridLayout):
     def __init__(self, **kwargs):
         super(AppLayout,self).__init__(**kwargs)
         self.cols = 1
-        #self.add_widget(SOS_Form())
-        self.add_widget(Map())
+        self.add_widget(SOS_Form())
+        #self.add_widget(Map())
         self.add_widget(NavBar(size_hint=(1, 0.1)))
 
 class MyApp(App):

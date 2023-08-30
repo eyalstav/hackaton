@@ -29,7 +29,6 @@ class Map(MapView):
             marker = MapMarkerPopup(lat=lat, lon=lon)
             marker.add_widget(Button(text=des))
             self.add_widget(marker)
-#zICXCXZCZX
     def get_current_location(self):
         from kivy.utils import platform
         if platform == "android" or platform == "ios":
@@ -59,7 +58,11 @@ class SOS_Form(GridLayout):
         self.add_widget(Label(text = "SOS!", font_size = 40))
         self.des_input = TextInput(text="Description", font_size=20)
         self.add_widget(self.form_input("Description", self.des_input))
-        self.add_widget(Button(text="Get Help!").bind(on_press = self.submit()))
+        self.submit_btn = Button(text="Get Help!")
+        self.submit_btn.bind(on_press=self.submit)
+        self.add_widget(self.submit_btn)
+
+
     def form_input(self, name, inp):
         lay = GridLayout(cols = 2)
         lay.size_hint = (0.5,1)
@@ -67,13 +70,12 @@ class SOS_Form(GridLayout):
         lay.add_widget(inp)
         return lay
 
-    def submit(self):
+    def submit(self,shit):
         import geocoder
         g = geocoder.ip('me')
         self.lat, self.lon = g.latlng
 
-        data = {"eyal44321@kjghkhgmail.com": {"description": self.des_input.text, "location": {"lat": self.lat, "lon": self.lon}}}
-        print(data)
+        data = {"eyal4432": {"description": self.des_input.text, "location": {"lat": self.lat, "lon": self.lon}}}
         res = requests.patch("https://communityconnect1234-default-rtdb.europe-west1.firebasedatabase.app/Help.json",
                              json.dumps(data))
         print(res.content)
