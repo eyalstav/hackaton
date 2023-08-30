@@ -1,4 +1,9 @@
-Screen:
+WindowManager:
+    FirstWindow:
+    SecondWindow:
+
+<FirstWindow>
+    name: "first"
     BoxLayout:
         orientation: 'vertical'
         spacing: 1
@@ -18,7 +23,7 @@ Screen:
                 id: Search_TextInput_id
                 size_hint_y: .97
                 pos_hint:{ 'left':0 , 'top': 1}
-                hint_text: 'search'
+                hint_text: 'search topic'
                 hint_text_color: 1,1,1,1
                 icon_left: 'magnify'
                 mode: "fill"
@@ -53,3 +58,40 @@ Screen:
                     size_hint_y: None
                     height: self.minimum_height
                     orientation: 'vertical'
+        BoxLayout:
+            size_hint : 1,0.2
+            Button:
+                text: "ADD ISSUE"
+                on_release: app.root.current = "second"
+
+<SecondWindow>:
+    name: "second"
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.width, root.height
+
+        TextInput:
+            id: Issue_Topic_id
+            hint_text: 'Enter issue topic'
+            multiline: False
+            font_size: 20
+
+        TextInput:
+            id: Issue_Description_id
+            hint_text: 'Enter issue description'
+            multiline: False
+            font_size: 20
+
+        Button:
+            size_hint : 1,0.3
+            text: "UPLOAD ISSUE"
+            font_size: 20
+            on_press:
+                app.insert_issue_to_db(root.ids.Issue_Topic_id.text, root.ids.Issue_Description_id.text)
+
+
+        Button:
+            size_hint : 1,0.3
+            text: "GO BACK"
+            font_size: 20
+            on_release: app.root.current = "first"
