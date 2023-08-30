@@ -9,6 +9,10 @@ from kivy.uix.widget import Widget
 from kivy.uix.image import Image
 from kivy_garden.mapview import MapView, MapMarkerPopup
 from kivy.lang import Builder
+import requests
+
+
+from SOS import *
 
 class NavBar(GridLayout):
     def __init__(self, **kwargs):
@@ -18,38 +22,13 @@ class NavBar(GridLayout):
         self.add_widget(Button(text = "Billboard"))
         self.add_widget(Button(text="SOS!"))
 
-class Map(MapView):
-    def __init__(self):
-        super().__init__()
-        self.zoom = 15
-        self.lon = 34.8
-        self.lat = 32.1
-        marker = MapMarkerPopup(lat=32.2, lon=34.7)
-        self.add_widget(marker)
-    def get_current_location(self):
-        from kivy.utils import platform
-        if platform == "android" or platform == "ios":
-            from plyer import gps
-            gps.configure(on_location = self.update_position,on_status=self.auth_gps)
-        if platform == "win":
-            import geopy
-            loc = geopy.Location
-            print(loc)
-
-    def auth_gps(self, status):
-        if status == "provider-enabled":
-            pass
-        else: pass
-    def update_position(self,*args,**kwargs):
-        self.lat = kwargs["lat"]
-        self.lon = kwargs["lon"]
 
 class AppLayout(GridLayout):
     def __init__(self, **kwargs):
         super(AppLayout,self).__init__(**kwargs)
         self.cols = 1
-        self.current_view = Map()
-        self.add_widget(self.current_view)
+        #self.add_widget(SOS_Form())
+        self.add_widget(Map())
         self.add_widget(NavBar(size_hint=(1, 0.1)))
 
 class MyApp(App):
