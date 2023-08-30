@@ -29,7 +29,7 @@ class Map(MapView):
             marker = MapMarkerPopup(lat=lat, lon=lon)
             marker.add_widget(Button(text=des))
             self.add_widget(marker)
-
+#zICXCXZCZX
     def get_current_location(self):
         from kivy.utils import platform
         if platform == "android" or platform == "ios":
