@@ -26,7 +26,23 @@ class Map(MapView):
         self.lat = 32.1
         marker = MapMarkerPopup(lat=32.2, lon=34.7)
         self.add_widget(marker)
+    def get_current_location(self):
+        from kivy.utils import platform
+        if platform == "android" or platform == "ios":
+            from plyer import gps
+            gps.configure(on_location = self.update_position,on_status=self.auth_gps)
+        if platform == "win":
+            import geopy
+            loc = geopy.Location
+            print(loc)
 
+    def auth_gps(self, status):
+        if status == "provider-enabled":
+            pass
+        else: pass
+    def update_position(self,*args,**kwargs):
+        self.lat = kwargs["lat"]
+        self.lon = kwargs["lon"]
 
 class AppLayout(GridLayout):
     def __init__(self, **kwargs):
