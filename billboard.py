@@ -31,12 +31,12 @@ def get_issues_text_from_db():
     res = requests.get(
         'https://communityconnect1234-default-rtdb.europe-west1.firebasedatabase.app/Billboard.json')
     billboard_db_data = res.json()
-    print(billboard_db_data)
     option_list = ""
-    for dictionary in billboard_db_data:
-        option_list += dictionary
-        option_list += ","
-    option_list = option_list.split(',')
+    if billboard_db_data is not None:
+        for dictionary in billboard_db_data:
+            option_list += dictionary
+            option_list += ","
+        option_list = option_list.split(',')
     return option_list
 
 
