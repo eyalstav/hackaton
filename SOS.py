@@ -29,6 +29,7 @@ class Map(MapView):
             marker = MapMarkerPopup(lat=lat, lon=lon)
             marker.add_widget(Button(text=des))
             self.add_widget(marker)
+        self.draw_pos()
     def get_current_location(self):
         from kivy.utils import platform
         if platform == "android" or platform == "ios":
@@ -46,6 +47,8 @@ class Map(MapView):
     def update_position(self,*args,**kwargs):
         self.lat = kwargs["lat"]
         self.lon = kwargs["lon"]
+    def draw_pos(self):
+        self.add_widget(MapMarkerPopup(lat=self.lat, lon=self.lon, source="location.png"))
 
 class SOS_Form(GridLayout):
     def __init__(self, **kwargs):
