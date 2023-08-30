@@ -90,7 +90,7 @@ class RVTestApp(MDApp):
         pass
 
     def insert_issue_to_db(self, topic, description):
-        if topic != "" and description != "":
+        if len(topic) > 1 and description != "":
             print(topic + "," + description)
             # patch db
             res = requests.patch(
