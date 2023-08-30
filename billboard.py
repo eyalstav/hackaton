@@ -8,6 +8,7 @@ from kivymd.uix.list import OneLineAvatarIconListItem
 from kivymd.uix.textfield import MDTextField
 import requests
 
+build_app = Builder.load_file("project.kv")
 
 class FirstWindow(Screen):
     pass
@@ -81,7 +82,7 @@ class RVTestApp(MDApp):
 
     def build(self):
         self.reset_data_to_default()
-        return Builder.load_file("project.kv")
+        return build_app
 
     def erase(self):
         self.reset_data_to_default()
