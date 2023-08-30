@@ -36,8 +36,6 @@ class LoginLayout(GridLayout):
         self.add_widget(Label(text="Friends +", font_size=40))
         self.name_input = TextInput(text="", font_size=20, )
         self.add_widget(self.form_input("Name", self.name_input))
-        self.email_input = TextInput(text="", font_size=20, )
-        self.add_widget(self.form_input("Email", self.email_input))
         self.phone_number_input = TextInput(text="", font_size=20, )
         self.add_widget(self.form_input("Phone Number", self.phone_number_input))
         self.password_input = TextInput(text="", font_size=20, )
@@ -64,9 +62,8 @@ class LoginLayout(GridLayout):
         return lay
 
     def sub_to_database(self):
-        data = {self.email_input.text: {"name": self.name_input.text,
-                                        "email": self.email_input.text,
-                                        "password": self.password_input.text}}
+        data = {self.name_input: {"phone": self.phone_number_input.text,
+                                  "password": self.password_input.text}}
         print(data)
         return data
 
